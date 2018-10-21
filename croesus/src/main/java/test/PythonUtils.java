@@ -18,7 +18,7 @@ public class PythonUtils {
 	}
 	
 	public void run(String word) throws IOException {
-		ProcessBuilder pb = new ProcessBuilder("/tmp/hello.py");
+		ProcessBuilder pb = new ProcessBuilder("python", "/tmp/hello.py");
 		Process p = pb.start();
 		BufferedReader reader = 
 				new BufferedReader( new InputStreamReader(p.getInputStream()));
@@ -32,5 +32,6 @@ public class PythonUtils {
 		String ret = reader.readLine();
 		System.out.print(ret);
 	}
+	
 
 }

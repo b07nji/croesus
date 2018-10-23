@@ -12,8 +12,14 @@ public class CsvUtils {
 		
 		HashMap<String, String> map = new HashMap<>();
 		
-		final String PATH = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
-		map = getFilePath(PATH, map);
+		String path = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
+		
+		File file = new File("PATH");
+		if (!file.exists()) {
+			path = "/tmp/csv";
+		}
+		
+		map = getFilePath(path, map);
 		
 		for (String key : map.keySet()) {
 			System.out.print(key + "\n");

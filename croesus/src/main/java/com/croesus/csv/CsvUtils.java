@@ -10,42 +10,46 @@ import java.util.HashMap;
 public class CsvUtils {
 	public static void main(String[] args) throws IOException {
 		
-		HashMap<String, String> map = new HashMap<>();
+		HashMap<String, HashMap<String, String>> fileHolder = new HashMap<>();
 		
-		String path = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
+
+		final String PATH = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
+		fileHolder = getFilePath(PATH, fileHolder);
+
 		
-		File file = new File("PATH");
-		if (!file.exists()) {
-			path = "/tmp/csv";
-		}
-		
-		map = getFilePath(path, map);
-		
-		for (String key : map.keySet()) {
-			System.out.print(key + "\n");
-			readCsv(map.get(key));
+		for (String key : fileHolder.keySet()) {
+			
+			if (key.equals("�}�l�b�N�X")) {
+				System.out.print(key + "\n");
+				readCsv(fileHolder.get(key));
+			}
 		}
 	}
 
 	
-	private static void readCsv(String filePath) throws IOException {
+	private static void readCsv(HashMap<String, String> files) throws IOException {
 		
-		File file = new File(filePath);
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-		
-		String line;
-		
-		while ( (line = br.readLine()) != null) {
-			String[] data = line.split("," , 0);
+		for (String key : files.keySet()) {
 			
-			for (String elem : data) {
-				System.out.print(elem + "\n");
+			File file = new File(files.get(key));
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+			
+			String line;
+			System.out.print(key);
+			while ( (line = br.readLine()) != null) {
+				String[] data = line.split("," , 0);
+				
+				for (String elem : data) {
+					System.out.print(elem + "\n");
+				}
 			}
+			br.close();
+			
 		}
-		br.close();
+		
 	}
 	
-	private static HashMap<String, String> getFilePath(String PATH, HashMap<String, String> map) {
+	private static HashMap<String, HashMap<String, String>> getFilePath(String PATH, HashMap<String, HashMap<String, String>> fileHolder) {
 		
 		File path = new File(PATH);
 		File[] files = path.listFiles();
@@ -54,13 +58,15 @@ public class CsvUtils {
 			
 			if (file.isDirectory()) {
 				
-				getFilePath(file.toString(), map);
+				getFilePath(file.toString(), fileHolder);
 				
 			}else {
-		
+				HashMap<String, String> map = new HashMap<>();
 				map.put(file.getName().toString(), file.toString());
+		
+				fileHolder.put(file.getParentFile().getName().toString(), map);
 			}
 		}
-		return map;
+		return fileHolder;
 	}
 }

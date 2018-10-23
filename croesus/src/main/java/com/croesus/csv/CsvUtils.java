@@ -23,8 +23,8 @@ public class CsvUtils {
 
 		for (String key : fileHolder.keySet()) {
 			
-			if (key.equals("マネックス")) {
-				System.out.print(key + "\n");
+			if (key.equals("松井")) {
+				
 				readCsv(fileHolder.get(key));
 			}
 		}
@@ -39,7 +39,6 @@ public class CsvUtils {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 			
 			String line;
-			System.out.print(key);
 			while ( (line = br.readLine()) != null) {
 				String[] data = line.split("," , 0);
 				

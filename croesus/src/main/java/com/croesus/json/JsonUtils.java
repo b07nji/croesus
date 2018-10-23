@@ -1,4 +1,4 @@
-package com.croesus.jsonUtils;
+package com.croesus.json;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class JsonUtils {
 	
 	public static void main(String[] args) throws IOException {
 		
-		String inputPath = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv/ƒ}ƒlƒbƒNƒX/monex_price.csv";
+		String inputPath = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv/ï¿½}ï¿½lï¿½bï¿½Nï¿½X/monex_price.csv";
 		String outputPath = "/Users/Tokiya/PycharmProjects/croesus_scraper/json/monex_test.json";
 		
 		File input = new File(inputPath);

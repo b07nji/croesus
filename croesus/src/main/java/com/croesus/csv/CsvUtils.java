@@ -3,16 +3,28 @@ package com.croesus.csv;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.List;
+
+import com.croesus.bean.MatsuiFee;
+import com.opencsv.CSVReader;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
+import com.opencsv.bean.CsvToBean;
+
 
 public class CsvUtils {
 	public static void main(String[] args) throws IOException {
 		
+		File m = new File("/tmp/csv/松井/1日の約定金合計金額.csv");
+		for (MatsuiFee e : convertToObject(m) ) {
+			System.out.println(e.getFee());
+		}
+
 		HashMap<String, HashMap<String, String>> fileHolder = new HashMap<>();
 		
-
 		String path = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
 
 		File file = new File(path);
@@ -29,7 +41,26 @@ public class CsvUtils {
 			}
 		}
 	}
+	
+	
+	private static List<MatsuiFee> convertToObject(File file) {
+		try {
+			CSVReader reader = new CSVReader(new FileReader(file));
 
+			ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy<>();
+			strat.setType(MatsuiFee.class);
+			String[] cols = new String[] {"maxExcurtionFee", "fee"};
+			strat.setColumnMapping(cols);
+			
+			CsvToBean csv = new CsvToBean();
+			List<MatsuiFee> list = csv.parse(strat, reader);
+			
+			return list;
+			
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 	private static void readCsv(HashMap<String, String> files) throws IOException {
 		
@@ -43,11 +74,10 @@ public class CsvUtils {
 				String[] data = line.split("," , 0);
 				
 				for (String elem : data) {
-					System.out.print(elem + "\n");
+					//System.out.print(elem + "\n");
 				}
 			}
 			br.close();
-			
 		}
 		
 	}

@@ -9,7 +9,9 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 
+import com.croesus.bean.FeeObject;
 import com.croesus.bean.MatsuiFee;
+import com.croesus.bean.SBIstandardFee;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
@@ -17,11 +19,6 @@ import com.opencsv.bean.CsvToBean;
 
 public class CsvUtils {
 	public static void main(String[] args) throws IOException {
-		
-		File m = new File("/tmp/csv/松井/1日の約定金合計金額.csv");
-		for (MatsuiFee e : convertToObject(m) ) {
-			System.out.println(e.getFee());
-		}
 
 		HashMap<String, HashMap<String, String>> fileHolder = new HashMap<>();
 		
@@ -33,33 +30,77 @@ public class CsvUtils {
 		}
 		fileHolder = getFilePath(path, fileHolder);
 
-		for (String key : fileHolder.keySet()) {
+		for (String dirName : fileHolder.keySet()) {
 			
-			if (key.equals("松井")) {
+			switch(dirName) {
+			case "松井":
+				for (String key : fileHolder.get(dirName).keySet()) {
+					String filePath = fileHolder.get(dirName).get(key).toString();
+					List<MatsuiFee> list = (List<MatsuiFee>) convertToObject(MatsuiFee.class, filePath);
+					
+					for (MatsuiFee e : list) {
+						
+						//System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
+					}
+				}
+				break;
 				
-				readCsv(fileHolder.get(key));
+			case "SBI":
+				for (String key : fileHolder.get(dirName).keySet()) {
+					System.out.println(key);
+					String filePath = fileHolder.get(dirName).get(key).toString();
+					List<SBIstandardFee> list = (List<SBIstandardFee>) convertToObject(SBIstandardFee.class, filePath);
+					for (SBIstandardFee e : list ) {
+						//System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
+					}
+				}
+				break;
 			}
+
 		}
 	}
 	
 	
-	private static List<MatsuiFee> convertToObject(File file) {
+	private static List<? extends FeeObject> convertToObject(Class<? extends FeeObject> clazz, String path) {
+		File file = new File(path);
+		
 		try {
 			CSVReader reader = new CSVReader(new FileReader(file));
 
 			ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy<>();
-			strat.setType(MatsuiFee.class);
+			strat.setType(clazz);
 			String[] cols = new String[] {"maxExcurtionFee", "fee"};
 			strat.setColumnMapping(cols);
 			
 			CsvToBean csv = new CsvToBean();
-			List<MatsuiFee> list = csv.parse(strat, reader);
+			List<? extends FeeObject> list = csv.parse(strat, reader);
 			
 			return list;
 			
 		}catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	private static HashMap<String, HashMap<String, String>> getFilePath(String path, HashMap<String, HashMap<String, String>> fileHolder) {
+		
+		File p = new File(path);
+		File[] files = p.listFiles();
+		HashMap<String, String> map = new HashMap<>();
+		for (File file : files) {
+			
+			if (file.isDirectory()) {
+				
+				getFilePath(file.toString(), fileHolder);
+				
+			}else {
+				
+				map.put(file.getName().toString(), file.toString());
+		
+				fileHolder.put(file.getParentFile().getName().toString(), map);
+			}
+		}
+		return fileHolder;
 	}
 	
 	private static void readCsv(HashMap<String, String> files) throws IOException {
@@ -74,32 +115,11 @@ public class CsvUtils {
 				String[] data = line.split("," , 0);
 				
 				for (String elem : data) {
-					//System.out.print(elem + "\n");
+					System.out.print(elem + "\n");
 				}
 			}
 			br.close();
 		}
 		
-	}
-	
-	private static HashMap<String, HashMap<String, String>> getFilePath(String path, HashMap<String, HashMap<String, String>> fileHolder) {
-		
-		File p = new File(path);
-		File[] files = p.listFiles();
-		
-		for (File file : files) {
-			
-			if (file.isDirectory()) {
-				
-				getFilePath(file.toString(), fileHolder);
-				
-			}else {
-				HashMap<String, String> map = new HashMap<>();
-				map.put(file.getName().toString(), file.toString());
-		
-				fileHolder.put(file.getParentFile().getName().toString(), map);
-			}
-		}
-		return fileHolder;
 	}
 }

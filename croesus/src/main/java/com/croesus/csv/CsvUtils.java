@@ -13,13 +13,17 @@ public class CsvUtils {
 		HashMap<String, HashMap<String, String>> fileHolder = new HashMap<>();
 		
 
-		final String PATH = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
-		fileHolder = getFilePath(PATH, fileHolder);
+		String path = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
 
-		
+		File file = new File(path);
+		if (!file.exists()) {
+			path = "/tmp/csv";
+		}
+		fileHolder = getFilePath(path, fileHolder);
+
 		for (String key : fileHolder.keySet()) {
 			
-			if (key.equals("�}�l�b�N�X")) {
+			if (key.equals("マネックス")) {
 				System.out.print(key + "\n");
 				readCsv(fileHolder.get(key));
 			}
@@ -49,10 +53,10 @@ public class CsvUtils {
 		
 	}
 	
-	private static HashMap<String, HashMap<String, String>> getFilePath(String PATH, HashMap<String, HashMap<String, String>> fileHolder) {
+	private static HashMap<String, HashMap<String, String>> getFilePath(String path, HashMap<String, HashMap<String, String>> fileHolder) {
 		
-		File path = new File(PATH);
-		File[] files = path.listFiles();
+		File p = new File(path);
+		File[] files = p.listFiles();
 		
 		for (File file : files) {
 			

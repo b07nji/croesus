@@ -4,20 +4,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class ExternalProcessUtils {
-
-	private final static String PATH = "/Users/Tokiya/PycharmProjects/croesus_scraper";
 	
-	public static void main(String[] args) throws IOException, InterruptedException {
-		
-		scrapePriceTables();
+	private static String path;
+	public ExternalProcessUtils(String path) {
+		this.path = path;
 	}
 	
-	private static String scrapePriceTables() throws IOException, InterruptedException {
+	public static String scrapePriceTables() throws IOException, InterruptedException {
 		
 		ProcessBuilder pb = new ProcessBuilder("python", "scrape_price_tables.py");
 		
-		File path = new File(PATH);
-		pb.directory(path);
+		File file = new File(path);
+		pb.directory(file);
 		
 		Process process = pb.start();
 		
@@ -28,7 +26,7 @@ public class ExternalProcessUtils {
 			System.out.print("DONE");
 		}
 		
-		return PATH + "/csv";
+		return path + "/csv";
 		
 	}
 }

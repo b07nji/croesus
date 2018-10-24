@@ -40,18 +40,17 @@ public class CsvUtils {
 					
 					for (MatsuiFee e : list) {
 						
-						//System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
+						System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
 					}
 				}
 				break;
 				
 			case "SBI":
 				for (String key : fileHolder.get(dirName).keySet()) {
-					System.out.println(key);
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<SBIstandardFee> list = (List<SBIstandardFee>) convertToObject(SBIstandardFee.class, filePath);
 					for (SBIstandardFee e : list ) {
-						//System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
+						System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
 					}
 				}
 				break;
@@ -59,8 +58,7 @@ public class CsvUtils {
 
 		}
 	}
-	
-	
+		
 	private static List<? extends FeeObject> convertToObject(Class<? extends FeeObject> clazz, String path) {
 		File file = new File(path);
 		

@@ -4,15 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class ExternalProcessUtils {
-
-	private final static String PATH = "/Users/Tokiya/PycharmProjects/croesus_scraper";
 	
-	public static void main(String[] args) throws IOException, InterruptedException {
-		
-		scrapePriceTables();
-	}
-	
-	private static String scrapePriceTables() throws IOException, InterruptedException {
+	public String scrapePriceTables(String PATH) throws IOException, InterruptedException {
 		
 		ProcessBuilder pb = new ProcessBuilder("python", "scrape_price_tables.py");
 		

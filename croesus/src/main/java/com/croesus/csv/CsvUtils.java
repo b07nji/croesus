@@ -14,6 +14,7 @@ import com.croesus.bean.GMOFee;
 import com.croesus.bean.MatsuiFee;
 import com.croesus.bean.MonexFee;
 import com.croesus.bean.RakutenFee;
+import com.croesus.bean.Response;
 import com.croesus.bean.SBIstandardFee;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
@@ -28,11 +29,21 @@ public class CsvUtils {
 		String path = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
 		
 		File file = new File(path);
+		
 		if (!file.exists()) {
 			path = "/tmp/csv";
 		}
+		
 		fileHolder = getFilePath(path, fileHolder);
+		Response response = getResponse(fileHolder);
+		
 
+	}
+	
+	public static Response getResponse(HashMap<String, HashMap<String, String>> fileHolder) {
+		
+		Response response = new Response();
+		
 		for (String dirName : fileHolder.keySet()) {
 			String[] cols = new String[] {"maxExcurtionFee", "fee"};
 			
@@ -43,9 +54,7 @@ public class CsvUtils {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<MatsuiFee> list = (List<MatsuiFee>) convertToObject(MatsuiFee.class, filePath, cols);
 					
-					for (MatsuiFee e : list) {
-						System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
-					}
+					response.setMatsuiFee(list);
 				}
 				break;
 				
@@ -53,9 +62,8 @@ public class CsvUtils {
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<SBIstandardFee> list = (List<SBIstandardFee>) convertToObject(SBIstandardFee.class, filePath, cols);
-					for (SBIstandardFee e : list ) {
-						System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
-					}
+					
+					response.setSbiFee(list);
 				}
 				break;
 				
@@ -64,9 +72,7 @@ public class CsvUtils {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<GMOFee> list = (List<GMOFee>) convertToObject(GMOFee.class, filePath, cols);
 					
-					for (GMOFee e : list) {
-						System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
-					}
+					response.setGmoFee(list);
 				}
 				break;
 				
@@ -75,9 +81,7 @@ public class CsvUtils {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<RakutenFee> list = (List<RakutenFee>) convertToObject(RakutenFee.class, filePath, cols);
 					
-					for (RakutenFee e : list) {
-						System.out.println(e.getMaxExcurtionFee() + " : " + e.getFee());
-					}
+					response.setRakutenFee(list);
 				}
 				break;
 				
@@ -87,16 +91,17 @@ public class CsvUtils {
 					cols = new String[] {"maxExcurtionFee", "feeForPc", "feeForPhone"};
 					List<MonexFee> list = (List<MonexFee>) convertToObject(MonexFee.class, filePath, cols);
 					
-					for (MonexFee e : list) {
-						System.out.println(e.getMaxExcurtionFee() + " : " + e.getFeeForPc() + ":" + e.getFeeForPhone());
-					}
+					response.setMonexFee(list);
 				}
-				break;	
+				break;
 			}
 		}
-	}
 		
-	private static List<? extends FeeObject> convertToObject(Class<? extends FeeObject> clazz, String path, String[] cols) {
+		return response;
+		
+	}
+	
+	public static List<? extends FeeObject> convertToObject(Class<? extends FeeObject> clazz, String path, String[] cols) {
 		File file = new File(path);
 		
 		try {
@@ -117,7 +122,7 @@ public class CsvUtils {
 		}
 	}
 	
-	private static HashMap<String, HashMap<String, String>> getFilePath(String path, HashMap<String, HashMap<String, String>> fileHolder) {
+	public static HashMap<String, HashMap<String, String>> getFilePath(String path, HashMap<String, HashMap<String, String>> fileHolder) {
 		
 		File p = new File(path);
 		File[] files = p.listFiles();
@@ -154,6 +159,5 @@ public class CsvUtils {
 			}
 			br.close();
 		}
-		
 	}
 }

@@ -4,40 +4,40 @@ import java.util.List;
 
 public class Response {
 	
-	private List<MatsuiFee> matsuiFee;
-	private List<SBIstandardFee> sbiFee;
-	private List<GMOFee> gmoFee;
-	private List<RakutenFee> rakutenFee;
-	private List<MonexFee> monexFee;
+	private String matsuiFee;
+	private String sbiFee;
+	private String gmoFee;
+	private String rakutenFee;
+	private String monexFee;
 	
-	public List<MatsuiFee> getMatsuiFee() {
+	public String getMatsuiFee() {
 		return matsuiFee;
 	}
-	public void setMatsuiFee(List<MatsuiFee> matsuiFee) {
+	public void setMatsuiFee(String matsuiFee) {
 		this.matsuiFee = matsuiFee;
 	}
-	public List<SBIstandardFee> getSbiFee() {
+	public String getSbiFee() {
 		return sbiFee;
 	}
-	public void setSbiFee(List<SBIstandardFee> sbiFee) {
+	public void setSbiFee(String sbiFee) {
 		this.sbiFee = sbiFee;
 	}
-	public List<GMOFee> getGmoFee() {
+	public String getGmoFee() {
 		return gmoFee;
 	}
-	public void setGmoFee(List<GMOFee> gmoFee) {
+	public void setGmoFee(String gmoFee) {
 		this.gmoFee = gmoFee;
 	}
-	public List<RakutenFee> getRakutenFee() {
+	public String getRakutenFee() {
 		return rakutenFee;
 	}
-	public void setRakutenFee(List<RakutenFee> rakutenFee) {
+	public void setRakutenFee(String rakutenFee) {
 		this.rakutenFee = rakutenFee;
 	}
-	public List<MonexFee> getMonexFee() {
+	public String getMonexFee() {
 		return monexFee;
 	}
-	public void setMonexFee(List<MonexFee> monexFee) {
+	public void setMonexFee(String monexFee) {
 		this.monexFee = monexFee;
 	}
 

@@ -16,6 +16,8 @@ import com.croesus.bean.MonexFee;
 import com.croesus.bean.RakutenFee;
 import com.croesus.bean.Response;
 import com.croesus.bean.SBIstandardFee;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
@@ -40,9 +42,10 @@ public class CsvUtils {
 
 	}
 	
-	public static Response getResponse(HashMap<String, HashMap<String, String>> fileHolder) {
+	public static Response getResponse(HashMap<String, HashMap<String, String>> fileHolder) throws JsonProcessingException {
 		
 		Response response = new Response();
+		ObjectMapper mapper = new ObjectMapper();
 		
 		for (String dirName : fileHolder.keySet()) {
 			String[] cols = new String[] {"maxExcurtionFee", "fee"};
@@ -53,8 +56,9 @@ public class CsvUtils {
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<MatsuiFee> list = (List<MatsuiFee>) convertToObject(MatsuiFee.class, filePath, cols);
+					String json = mapper.writeValueAsString(list);
 					
-					response.setMatsuiFee(list);
+					response.setMatsuiFee(json);
 				}
 				break;
 				
@@ -62,8 +66,9 @@ public class CsvUtils {
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<SBIstandardFee> list = (List<SBIstandardFee>) convertToObject(SBIstandardFee.class, filePath, cols);
+					String json = mapper.writeValueAsString(list);
 					
-					response.setSbiFee(list);
+					response.setSbiFee(json);
 				}
 				break;
 				
@@ -71,8 +76,9 @@ public class CsvUtils {
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<GMOFee> list = (List<GMOFee>) convertToObject(GMOFee.class, filePath, cols);
+					String json = mapper.writeValueAsString(list);
 					
-					response.setGmoFee(list);
+					response.setGmoFee(json);
 				}
 				break;
 				
@@ -80,8 +86,9 @@ public class CsvUtils {
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<RakutenFee> list = (List<RakutenFee>) convertToObject(RakutenFee.class, filePath, cols);
+					String json = mapper.writeValueAsString(list);
 					
-					response.setRakutenFee(list);
+					response.setRakutenFee(json);
 				}
 				break;
 				
@@ -90,8 +97,9 @@ public class CsvUtils {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					cols = new String[] {"maxExcurtionFee", "feeForPc", "feeForPhone"};
 					List<MonexFee> list = (List<MonexFee>) convertToObject(MonexFee.class, filePath, cols);
+					String json = mapper.writeValueAsString(list);
 					
-					response.setMonexFee(list);
+					response.setMonexFee(json);
 				}
 				break;
 			}

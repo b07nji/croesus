@@ -2,22 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="/js/fee.js" th:src="@{/js/fee.js}"></script>
 <title>croesus index</title>
 </head>
 <body>
 
 
-<script>
-var url = "/fee"
-
-fetch(url)
-	.then(response => {
-		return response.text();
-	})
-	.then(body => {
-		document.body.innerHTML = body;
-	});
-
-</script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!-- <link href="/css/compareFees.css" th:href="@{/css/compareFees.css}" rel="stylesheet"></link>  --> 
+<!-- <script src="/js/compareFees.js" th:src="@{/js/compareFees.js}"></script> -->
+<title>demo</title>
+</head>
+<body>
+
+<div class="table-responsive">
+	<table class="table">
+		<thread>
+			<td>松井証券</td>
+		</thread>
+		<thread>
+			<tr>
+				<td th:text="${request.getMatsui()[0].getMaxExcurtionFee()}"></td>
+				<td th:text="${request.getMatsui()[0].getFee()}"></td>
+			</tr>
+		</thread>
+		<tbody>
+			<tr>
+				<td th:text="${request.getMatsui()[1].getMaxExcurtionFee()}"></td>
+				<td th:text="${request.getMatsui()[1].getFee()}"></td>
+			</tr>
+			<tr>
+				<td th:text="${request.getMatsui()[2].getMaxExcurtionFee()}"></td>
+				<td th:text="${request.getMatsui()[2].getFee()}"></td>
+			</tr>
+			<tr>
+				<td th:text="${request.getMatsui()[3].getMaxExcurtionFee()}"></td>
+				<td th:text="${request.getMatsui()[3].getFee()}"></td>
+			</tr>
+			<tr>
+				<td th:text="${request.getMatsui()[4].getMaxExcurtionFee()}"></td>
+				<td th:text="${request.getMatsui()[4].getFee()}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<script>
+var xhr = new XMLHttpRequest();
+var obj = xhr.responseText;
+console.log(obj);
+</script>
+
+</body>
+</html>

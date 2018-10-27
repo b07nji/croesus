@@ -16,7 +16,6 @@ import com.croesus.bean.MonexFee;
 import com.croesus.bean.RakutenFee;
 import com.croesus.bean.Response;
 import com.croesus.bean.SBIstandardFee;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
@@ -26,7 +25,6 @@ public class CsvUtils {
 	public static Response getResponse(HashMap<String, HashMap<String, String>> fileHolder) {
 		
 		Response response = new Response();
-		ObjectMapper mapper = new ObjectMapper();
 		
 		for (String dirName : fileHolder.keySet()) {
 			String[] cols = new String[] {"maxExcurtionFee", "fee"};

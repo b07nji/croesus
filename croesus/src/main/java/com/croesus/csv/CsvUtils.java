@@ -16,7 +16,6 @@ import com.croesus.bean.MonexFee;
 import com.croesus.bean.RakutenFee;
 import com.croesus.bean.Response;
 import com.croesus.bean.SBIstandardFee;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
@@ -24,25 +23,8 @@ import com.opencsv.bean.CsvToBean;
 
 
 public class CsvUtils {
-	public static void main(String[] args) throws IOException {
-		
-		HashMap<String, HashMap<String, String>> fileHolder = new HashMap<>();
-		
-		String path = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
-		
-		File file = new File(path);
-		
-		if (!file.exists()) {
-			path = "/tmp/csv";
-		}
-		
-		fileHolder = getFilePath(path, fileHolder);
-		Response response = getResponse(fileHolder);
-		
-
-	}
 	
-	public static Response getResponse(HashMap<String, HashMap<String, String>> fileHolder) throws JsonProcessingException {
+	public static Response getResponse(HashMap<String, HashMap<String, String>> fileHolder) {
 		
 		Response response = new Response();
 		ObjectMapper mapper = new ObjectMapper();
@@ -56,9 +38,8 @@ public class CsvUtils {
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<MatsuiFee> list = (List<MatsuiFee>) convertToObject(MatsuiFee.class, filePath, cols);
-					String json = mapper.writeValueAsString(list);
 					
-					response.setMatsuiFee(json);
+					response.setMatsuiFee(list);
 				}
 				break;
 				
@@ -66,9 +47,8 @@ public class CsvUtils {
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<SBIstandardFee> list = (List<SBIstandardFee>) convertToObject(SBIstandardFee.class, filePath, cols);
-					String json = mapper.writeValueAsString(list);
-					
-					response.setSbiFee(json);
+				
+					response.setSbiFee(list);
 				}
 				break;
 				
@@ -76,9 +56,8 @@ public class CsvUtils {
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<GMOFee> list = (List<GMOFee>) convertToObject(GMOFee.class, filePath, cols);
-					String json = mapper.writeValueAsString(list);
-					
-					response.setGmoFee(json);
+				
+					response.setGmoFee(list);
 				}
 				break;
 				
@@ -86,9 +65,8 @@ public class CsvUtils {
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					List<RakutenFee> list = (List<RakutenFee>) convertToObject(RakutenFee.class, filePath, cols);
-					String json = mapper.writeValueAsString(list);
 					
-					response.setRakutenFee(json);
+					response.setRakutenFee(list);
 				}
 				break;
 				
@@ -97,9 +75,8 @@ public class CsvUtils {
 					String filePath = fileHolder.get(dirName).get(key).toString();
 					cols = new String[] {"maxExcurtionFee", "feeForPc", "feeForPhone"};
 					List<MonexFee> list = (List<MonexFee>) convertToObject(MonexFee.class, filePath, cols);
-					String json = mapper.writeValueAsString(list);
 					
-					response.setMonexFee(json);
+					response.setMonexFee(list);
 				}
 				break;
 			}

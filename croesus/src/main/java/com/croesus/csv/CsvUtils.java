@@ -49,7 +49,7 @@ public class CsvUtils {
 		
 		for (String dirName : fileHolder.keySet()) {
 			String[] cols = new String[] {"maxExcurtionFee", "fee"};
-			
+
 			switch(dirName) {
 			
 			case "松井":
@@ -102,6 +102,7 @@ public class CsvUtils {
 					response.setMonexFee(json);
 				}
 				break;
+
 			}
 		}
 		
@@ -168,4 +169,5 @@ public class CsvUtils {
 			br.close();
 		}
 	}
+
 }

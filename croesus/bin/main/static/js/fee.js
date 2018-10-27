@@ -1,70 +1,83 @@
-var url = "/fee"
+function compareFees() {
 	
-fetch(url)
-	.then(response => {
-		return  response.json();
+	var url = "/fee"
 		
-	}).then(json => {
-		
-		function createTable(obj, company, tableId) {
-			console.log(obj.length);
-			var table = document.createElement("table");
-			table.id = tableId;
+	fetch(url)
+		.then(response => {
+			return  response.json();
 			
-			var html = `<tr><td></td><td>${company}</td></tr>`;
-			for (var i = 0; i < obj.length; i++) {
+		}).then(json => {
+			
+			function createTable(obj, company, tableId) {
 				
+				var table = document.createElement("table");
+				table.id = tableId;
+				
+				var html = ``;
 				if (obj === json.monexFee) {
-					html += `\
-						<tr>\
-							<td>${obj[i].maxExcurtionFee}</td>\
-							<td>${obj[i].feeForPc}</td>\
-							<td>${obj[i].feeForPhone}</td>\
-						</tr>
-							`;
+					html = `<thead><tr><td style="font-size : 15px;" colspan="3">${company}</td></tr></thead><tbody>`;
+						
 				} else {
-					html += `\
-						<tr>\
-							<td>${obj[i].maxExcurtionFee}</td>\
-							<td>${obj[i].fee}</td>\
-						</tr>
-							`;
+					html = `<thead><tr class="company"><td style="font-size : 15px;" colspan="2">${company}</td></tr></thead><tbody>`;
 				}
+				
+				for (var i = 0; i < obj.length; i++) {
+					
+					
+					if (obj === json.monexFee) {
+						html += `\
+							<tr>\
+								<td>${obj[i].maxExcurtionFee}</td>\
+								<td>${obj[i].feeForPc}</td>\
+								<td>${obj[i].feeForPhone}</td>\
+							</tr>
+								`;
+					} else {
+						html += `\
+							<tr>\
+								<td>${obj[i].maxExcurtionFee}</td>\
+								<td>${obj[i].fee}</td>\
+							</tr>
+								`;
+					}
+				}
+
+				table.innerHTML = html + `</tbody>`;
+				
+				var parent = document.getElementById('feeDiv');
+				parent.appendChild(table);
 			}
-
-			table.innerHTML = html;
 			
-			var parent = document.getElementById('feeDiv');
-			parent.appendChild(table);
-		}
-		
 
-		var matsui = json.matsuiFee;
-		if (matsui !== null) {
-			createTable(matsui, '松井証券', 'matsuiFeeTable');
-		}
-		
-		var sbi = json.sbiFee;
-		if (sbi !== null) {
-			createTable(sbi, 'SBI証券', 'sbiFeeTable');
-		}
-		
-		var gmo = json.gmoFee;
-		if (gmo !== null) {
-			createTable(gmo, 'GMOクリック証券', 'gmoFeeTable');
-		}
-		
-		var rakuten = json.rakutenFee;
-		if (rakuten !== null) {
-			createTable(rakuten, '楽天証券', 'rakutenFeeTable');
-		}
-		
-		var monex = json.monexFee;
-		if (monex !== null) {
-			createTable(monex, 'マネックス証券', 'monexFeeTable');
-		}
-		
-	});
+			var matsui = json.matsuiFee;
+			if (matsui !== null) {
+				createTable(matsui, '松井証券', 'matsuiFeeTable');
+			}
+				
+			var monex = json.monexFee;
+			if (monex !== null) {
+				createTable(monex, 'マネックス証券', 'monexFeeTable');
+			}
+			
+			var rakuten = json.rakutenFee;
+			if (rakuten !== null) {
+				createTable(rakuten, '楽天証券', 'rakutenFeeTable');
+			}
+			
+			var gmo = json.gmoFee;
+			if (gmo !== null) {
+				createTable(gmo, 'GMOクリック証券', 'gmoFeeTable');
+			}
+			
+			var sbi = json.sbiFee;
+			if (sbi !== null) {
+				createTable(sbi, 'SBI証券', 'sbiFeeTable');
+			}
+			
+		});
+
+	
+}
 
 /*
 `\

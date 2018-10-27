@@ -1,25 +1,59 @@
 @charset "UTF-8";
+
+body {
+	margin: 5px 10px 15px 20px;
+}
+
+.feeDiv {
+	display: table;
+}
+
 #matsuiFeeTable {
 	width : 250px;
-	
+	display: table-cell;
+	font-size: 10pt;
+}
+
+#matsuiFeeTable th, #matsuiFeeTable td {
+	text-align: center;
 }
 
 #sbiFeeTable {
 	width : 250px;
-	
+	display: table-cell;
+	font-size: 10pt;
+}
+
+#sbiFeeTable th, #sbiFeeTable td {
+	text-align: center;
 }
 
 #gmoFeeTable {
 	width : 250px;
-	
+	display: table-cell;
+	font-size: 10pt;
+}
+
+#gmoFeeTable th, #gmoFeeTable td {
+	text-align: center;
 }
 
 #rakutenFeeTable {
 	width : 250px;
-	
+	display: table-cell;
+	font-size: 10pt;
+}
+
+#rakutenFeeTable th, #rakutenFeeTable td {
+	text-align: center;
 }
 
 #monexFeeTable {
-	width : 500px;
-	
+	width : 375px;
+	display: table-cell;
+	font-size: 10pt;
+}
+
+#monexFeeTable th, #monexFeeTable td {
+	text-align: center;
 }

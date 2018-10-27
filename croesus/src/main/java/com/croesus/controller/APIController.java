@@ -17,7 +17,7 @@ public class APIController {
 	@RequestMapping("/fee")
 	public Response getFee() throws IOException, InterruptedException {
 	
-		//ExternalProcessUtils ex = new ExternalProcessUtils();
+		ExternalProcessUtils ex = new ExternalProcessUtils();
 		
 		//String path = ex.scrapePriceTables("/Users/Tokiya/PycharmProjects/croesus_scraper");
 		String path = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";

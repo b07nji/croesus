@@ -8,6 +8,15 @@ body {
 	display: table;
 }
 
+#nav {
+	float: left;
+	width: 15%;
+}
+
+container {
+	float: right;
+}
+
 #matsuiFeeTable {
 	width : 250px;
 	display: table-cell;

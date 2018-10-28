@@ -15,19 +15,53 @@
 <h1>demo</h1>
 </div>
 
-<div id="nav"></div>
-<div id="container"></div>
+<div id="nav">
 
 <p>人気ネット証券会社</p>
-<ul>
-	<li><a href="https://www.matsui.co.jp/" target="_blank">松井証券</a></li>
-	<li><a href="https://www.monex.co.jp/" target="_blank">マネックス証券</a></li>
-	<li><a href="https://www.rakuten-sec.co.jp/" target="_blank">楽天証券</a></li>
-	<li><a href="https://www.click-sec.com/" target="_blank">GMOクリック証券</a></li>
-	<li><a href="https://www.sbisec.co.jp/ETGate" target="_blank">SBI証券</a></li>	
+
+<p><a href="javascript:void(0);" onclick="compareFees();">手数料比較を比較する</a></p>
+
+<ul class="menu">
+	<li id="matsui">松井証券
+		<ul>
+			<li><a id="matsui" href="javascript:void(0);" onclick="showTable(id);">手数料を見る</a></li>
+			<li><a href="https://www.matsui.co.jp/" target="_blank">サイトへ</a></li>
+		</ul>
+	</li>
+	<li>マネックス証券
+		<ul>
+			<li><a id="monex" href="javascript:void(0);" onclick="showTable(id);">手数料を見る</a></li>
+			<li><a href="https://www.monex.co.jp/" target="_blank">サイトへ</a></li>
+		</ul>
+	</li>
+	<li>楽天証券
+		<ul>
+			<li><a id="rakuten" href="javascript:void(0);" onclick="showTable(id);">手数料を見る</a></li>
+			<li><a href="https://www.rakuten-sec.co.jp/" target="_blank">サイトへ</a></li>
+		</ul>
+	</li>
+	<li>GMOクリック証券
+		<ul>
+			<li><a id="gmo" href="javascript:void(0);" onclick="showTable(id);">手数料を見る</a></li>
+			<li><a href="https://www.click-sec.com/" target="_blank">サイトへ</a></li>
+		</ul>
+	</li>
+	<li>SBI証券
+		<ul>
+			<li><a id="sbi" href="javascript:void(0);" onclick="showTable(id);">手数料を見る</a></li>
+			<li><a href="https://www.sbisec.co.jp/ETGate" target="_blank">サイトへ</a></li>
+		</ul>
+	</li>	
 </ul>
 
-<p><a href="javascript:void(0);" onclick="compareFees();">証券会社 手数料比較</a></p>
+</div>
+
+
+<div id="container">
+
+
+</div>
+
 <div id="feeDiv"></div>
 
 <div id="footer"></div>

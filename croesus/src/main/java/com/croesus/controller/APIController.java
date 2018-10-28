@@ -19,12 +19,12 @@ public class APIController {
 	
 		ExternalProcessUtils ex = new ExternalProcessUtils();
 		
-		//String path = ex.scrapePriceTables("/Users/Tokiya/PycharmProjects/croesus_scraper");
 		String path = "/Users/Tokiya/PycharmProjects/croesus_scraper/csv";
 		
 		File file = new File(path);
 		if (!file.exists()) {
-			path = "/tmp/csv";
+			//path = "/tmp/csv";
+			path = ex.scrapePriceTables("/Users/Tokiya/PycharmProjects/croesus_scraper");
 		}
 		HashMap<String, HashMap<String, String>> fileHolder = new HashMap<>();
 		

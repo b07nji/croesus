@@ -4,14 +4,22 @@ import java.util.List;
 
 public class Response {
 	
+	private List<ComparisonTable> comparisonTable;
 	private List<MatsuiFee> matsuiFee;
 	private List<SBIstandardFee> sbiFee;
 	private List<GMOFee> gmoFee;
 	private List<RakutenFee> rakutenFee;
 	private List<MonexFee> monexFee;
 	
+	public List<ComparisonTable> getComparisonTable() {
+		return comparisonTable;
+	}
 	public List<MatsuiFee> getMatsuiFee() {
 		return matsuiFee;
+	}
+	
+	public void setComparisonTable(List<ComparisonTable> comparisonTable) {
+		this.comparisonTable = comparisonTable;
 	}
 	public void setMatsuiFee(List<MatsuiFee> matsuiFee) {
 		this.matsuiFee = matsuiFee;

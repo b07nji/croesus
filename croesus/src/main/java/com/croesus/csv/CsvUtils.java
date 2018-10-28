@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 
+import com.croesus.bean.ComparisonTable;
 import com.croesus.bean.FeeObject;
 import com.croesus.bean.GMOFee;
 import com.croesus.bean.MatsuiFee;
@@ -31,6 +32,16 @@ public class CsvUtils {
 
 			switch(dirName) {
 			
+			case "csv":
+				for (String key : fileHolder.get(dirName).keySet()) {
+					cols = new String[] {"maxExcurtionFee", "gmo", "sbi", "matsui", "rakuten", "monex"};
+					String filePath = fileHolder.get(dirName).get(key).toString();
+					List<ComparisonTable> list = (List<ComparisonTable>) convertComparisonTableToObject(filePath, cols);
+					
+					response.setComparisonTable(list);
+				}
+				break;
+				
 			case "松井":
 				for (String key : fileHolder.get(dirName).keySet()) {
 					String filePath = fileHolder.get(dirName).get(key).toString();
@@ -76,12 +87,30 @@ public class CsvUtils {
 					response.setMonexFee(list);
 				}
 				break;
-
 			}
 		}
-		
 		return response;
+	}
+	
+	public static List<ComparisonTable> convertComparisonTableToObject(String path, String[] cols) {
+		File file = new File(path);
 		
+		try {
+			CSVReader reader = new CSVReader(new FileReader(file));
+
+			ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy<>();
+			
+			strat.setType(ComparisonTable.class);
+			strat.setColumnMapping(cols);
+			
+			CsvToBean csv = new CsvToBean();
+			List<ComparisonTable> list = csv.parse(strat, reader);
+			
+			return list;
+			
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public static List<? extends FeeObject> convertToObject(Class<? extends FeeObject> clazz, String path, String[] cols) {

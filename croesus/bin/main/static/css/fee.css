@@ -17,11 +17,23 @@ container {
 	float: right;
 }
 
+#comparisonTable {
+	display: table-cell;
+	font-size: 10pt;
+}
+
+#comparisonTable th, #comparisonTable td {
+	text-align: center;
+}
+
 #matsuiFeeTable {
+	margin: 5px 5px 5px 5px;
 	width : 250px;
 	display: table-cell;
 	font-size: 10pt;
 }
+
+
 
 #matsuiFeeTable th, #matsuiFeeTable td {
 	text-align: center;
@@ -31,6 +43,7 @@ container {
 	width : 250px;
 	display: table-cell;
 	font-size: 10pt;
+	margin: 5px;
 }
 
 #sbiFeeTable th, #sbiFeeTable td {
@@ -41,6 +54,7 @@ container {
 	width : 250px;
 	display: table-cell;
 	font-size: 10pt;
+	margin: 5px;
 }
 
 #gmoFeeTable th, #gmoFeeTable td {
@@ -51,6 +65,7 @@ container {
 	width : 250px;
 	display: table-cell;
 	font-size: 10pt;
+	margin: 5px;
 }
 
 #rakutenFeeTable th, #rakutenFeeTable td {
@@ -61,6 +76,7 @@ container {
 	width : 375px;
 	display: table-cell;
 	font-size: 10pt;
+	margin: 5px;
 }
 
 #monexFeeTable th, #monexFeeTable td {
